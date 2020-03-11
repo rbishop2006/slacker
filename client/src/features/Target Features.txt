@@ -1,0 +1,51 @@
+logo
+
+push notifications
+pause notifications
+
+emojis
+color theming
+fonts
+rich text formatting
+reaction button
+typing notifications
+
+read receipts
+time stamps
+@users
+show active users
+favorites list
+friends list
+block list
+avatar
+user stats
+inviting users
+user directory
+
+direct messages
+message threads
+hide messages
+sort messages
+message comments
+follow messages
+star messages
+chat history
+
+channels
+group messaging
+channel searching
+
+user profiles
+auth
+password reset
+signout
+account settings
+user role (admin)
+
+
+
+
+
+
+
+

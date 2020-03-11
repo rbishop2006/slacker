@@ -1,0 +1,67 @@
+social media linking
+location sharing
+mobile app
+languages app
+conferences(?)
+message drafts
+pinning messages
+chat bot
+in chat games
+job postings
+marketplace
+screen sharing
+streaming from platform
+donation currency
+organizations
+search features
+upload files
+upload pictures
+calendar
+vid chat
+voice chat
+file sharing
+file hosting
+web searches
+work spaces
+report users
+notifications
+keyboard shortcuts
+tech support
+FAQs
+donation button
+code snippets
+apps ingegrate
+account status
+"how to use" docs
+intro tutorial
+slash commands
+ - random website
+  - timer
+  - weather
+  - order pizza
+  - alarm clock
+poke
+reminders
+upvote system
+enemies list
+sending money
+light mode / dark mode
+responsiveness
+layout customization
+google drive
+
+
+DONT CARE
+hidden messages
+best of
+trending
+chatbot apiM
+api
+hooks
+a link to ryan's list
+gk live streaming
+tinder esque swiping
+restaurant locator
+user stories
+air b&b
+paid features
