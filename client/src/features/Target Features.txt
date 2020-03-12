@@ -4,7 +4,6 @@ fonts
 rich text formatting
 reaction button
 
-
 time stamps
 @users
 show active users

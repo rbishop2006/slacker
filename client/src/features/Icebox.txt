@@ -53,7 +53,7 @@ reminders
 upvote system
 enemies list
 sending money
-light mode / dark mode
+
 responsiveness
 layout customization
 google drive
