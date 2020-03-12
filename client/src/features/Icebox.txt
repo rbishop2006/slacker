@@ -1,4 +1,12 @@
+typing notifications
+read receipts
+push notifications
+pause notifications
+favorites list
+friends list
+block list
 social media linking
+logo
 location sharing
 mobile app
 languages app
