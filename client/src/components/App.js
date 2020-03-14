@@ -1,14 +1,22 @@
 import React from "react"
-
 import MessageForm from "./MessageForm"
 import Messages from "./Messages.js"
+import { BrowserRouter as Router, Route } from "react-router-dom"
+import AuthRoute from "../lib/AuthRoute"
+
+import Login from "./Login"
+import Foo from "./Foo"
 
 export default props => {
   return (
-    <div>
-      <MessageForm />
-      <Messages />
-    </div>
+    <Router>
+      <div>
+        <Route path="/login" component={Login} />
+        <AuthRoute exact path="/" component={Foo} />
+        <MessageForm />
+        <Messages />
+      </div>
+    </Router>
   )
 }
 
