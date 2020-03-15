@@ -1,21 +1,16 @@
 import React, { useState } from "react"
 import { useAuth } from "../hooks"
-import { Link, Redirect, Route } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 export default props => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
-  const { login, logout } = useAuth()
+  const { login } = useAuth()
 
   function handleLogin(e) {
     e.preventDefault(e)
 
     login(username, password)
-    // return (
-    //   <Route>
-    //     <Redirect to="/" />
-    //   </Route>
-    // )
   }
 
   return (
@@ -35,7 +30,7 @@ export default props => {
       />
       <br />
       <button type="submit">Login</button>
-
+      <Link to="/register">Not Registered?</Link>
       <Link to="/">Enter Chat</Link>
     </form>
   )

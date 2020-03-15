@@ -1,11 +1,11 @@
 import React, { useEffect } from "react"
-import { useFoo, useAuth } from "../hooks"
+import { useChatroom, useAuth } from "../hooks"
 
 import MessageForm from "./MessageForm"
 import Messages from "./Messages.js"
 
 export default props => {
-  const { get, foo } = useFoo()
+  const { get } = useChatroom()
 
   const { logout } = useAuth()
 

@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from "react-redux"
 import axios from "axios"
-import { useEffect } from "react"
 
 const LOGIN_SUCCESS = "auth/LOGIN_SUCCESS"
 const LOGIN_FAILURE = "auth/LOGIN_FAILURE"
