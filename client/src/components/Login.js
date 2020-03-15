@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { useAuth } from "../hooks"
-import { Link } from "react-router-dom"
+import { Link, Redirect, Route } from "react-router-dom"
 
 export default props => {
   const [username, setUsername] = useState("")
@@ -8,15 +8,20 @@ export default props => {
   const { login, logout } = useAuth()
 
   function handleLogin(e) {
-    e.preventDefault()
+    e.preventDefault(e)
 
     login(username, password)
+    // return (
+    //   <Route>
+    //     <Redirect to="/" />
+    //   </Route>
+    // )
   }
 
   return (
     <form onSubmit={handleLogin}>
       <input
-        tupe="text"
+        type="text"
         value={username}
         onChange={e => setUsername(e.target.value)}
         placeholder="username"
@@ -29,9 +34,9 @@ export default props => {
         placeholder="password"
       />
       <br />
-      <button tupe="submit">Login</button>
-      <Link to="/">Foo</Link>
-      <button onClick={e => logout()}>Logout</button>
+      <button type="submit">Login</button>
+
+      <Link to="/">Enter Chat</Link>
     </form>
   )
 }

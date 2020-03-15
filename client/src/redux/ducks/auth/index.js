@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux"
 import axios from "axios"
+import { useEffect } from "react"
 
 const LOGIN_SUCCESS = "auth/LOGIN_SUCCESS"
 const LOGIN_FAILURE = "auth/LOGIN_FAILURE"
@@ -9,20 +10,20 @@ const LOGOUT = "auth/LOGOUT"
 let interceptor = {}
 
 const initialState = {
-  isAthenticated: false,
+  isAuthenticated: false,
   pending: false
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_SUCCESS:
-      return { ...state, isAthenticated: true, pending: false }
+      return { ...state, isAuthenticated: true, pending: false }
     case LOGIN_FAILURE:
-      return { ...state, isAthenticated: false, pending: false }
+      return { ...state, isAuthenticated: false, pending: false }
     case LOGIN_PENDING:
-      return { ...state, isAthenticated: false, pending: true }
+      return { ...state, isAuthenticated: false, pending: true }
     case LOGOUT:
-      return { ...state, isAthenticated: false, pending: false }
+      return { ...state, isAuthenticated: false, pending: false }
     default:
       return state
   }
@@ -60,12 +61,13 @@ function deauthenticate() {
 
 export function useAuth() {
   const dispatch = useDispatch()
-  const isAthenticated = useSelector(
-    appState => appState.authState.isAthenticated
+  const isAuthenticated = useSelector(
+    appState => appState.authState.isAuthenticated
   )
+
   const login = (username, password) =>
     dispatch(authenticate(username, password))
   const logout = () => dispatch(deauthenticate())
 
-  return { login, logout, isAthenticated }
+  return { login, logout, isAuthenticated }
 }
