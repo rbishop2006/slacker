@@ -1,23 +1,24 @@
 import React, { useEffect } from "react"
-import { useChatroom, useAuth } from "../hooks"
+import { useChatroom } from "../hooks"
+import { useAuth } from "react-auth"
 
 import MessageForm from "./MessageForm"
 import Messages from "./Messages.js"
 
 export default props => {
   const { get } = useChatroom()
-
-  const { logout } = useAuth()
+  const { profile, signout } = useAuth()
 
   useEffect(() => {
     get()
-  })
+  }, [])
 
   return (
     <div>
       <Messages />
       <MessageForm />
-      <button onClick={e => logout()}>Logout</button>
+      <h1>{profile.username}</h1>
+      <button onClick={e => signout()}>Logout</button>
     </div>
   )
 }

@@ -1,1 +1,1 @@
-export const NEW_MESSAGE = "chat/NEW_MESSAGE"
+export const ADD_MESSAGE = "chat/ADD_MESSAGE"

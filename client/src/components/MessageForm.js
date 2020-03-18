@@ -37,6 +37,7 @@ export default props => {
             activeFontFamily={activeFontFamily}
             onChange={nextFont => setActiveFontFamily(nextFont.family)}
           />
+          <p className="apply-font">The font will be applied to this text.</p>
 
           <textarea
             className="apply-font"

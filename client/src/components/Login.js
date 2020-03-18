@@ -1,37 +1,38 @@
 import React, { useState } from "react"
-import { useAuth } from "../hooks"
-import { Link } from "react-router-dom"
+import { useAuth } from "react-auth"
+import { Button, Form } from "semantic-ui-react"
 
 export default props => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
-  const { login } = useAuth()
+  const { signin } = useAuth()
 
   function handleLogin(e) {
     e.preventDefault(e)
-
-    login(username, password)
+    signin(username, password).then(profile => {
+      props.history.push("/chat/general")
+    })
   }
 
   return (
-    <form onSubmit={handleLogin}>
-      <input
-        type="text"
-        value={username}
-        onChange={e => setUsername(e.target.value)}
-        placeholder="username"
-      />
-      <br />
-      <input
-        type="password"
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-        placeholder="password"
-      />
-      <br />
-      <button type="submit">Login</button>
-      <Link to="/register">Not Registered?</Link>
-      <Link to="/">Enter Chat</Link>
-    </form>
+    <Form onSubmit={handleLogin}>
+      <Form.Field>
+        <input
+          type="text"
+          value={username}
+          onChange={e => setUsername(e.target.value)}
+          placeholder="username"
+        />
+      </Form.Field>
+      <Form.Field>
+        <input
+          type="password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          placeholder="password"
+        />
+      </Form.Field>
+      <Button type="submit">Login</Button>
+    </Form>
   )
 }

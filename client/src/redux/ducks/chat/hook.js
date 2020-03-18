@@ -1,9 +1,9 @@
-import socket from "./socket"
+import socket from "../../../socket.js"
 import { useSelector } from "react-redux"
 
 export function useChat() {
-  const add = msg => socket.emit("message", msg)
   const messages = useSelector(appState => appState.chatState.messages)
+  const add = msg => socket.emit("message", msg)
 
-  return { add, messages }
+  return { messages, add }
 }

@@ -1,19 +1,33 @@
-import React from "react"
-import { BrowserRouter as Router, Route } from "react-router-dom"
-import AuthRoute from "../lib/AuthRoute"
-import Login from "./Login"
-import Chatroom from "./Chatroom"
-import Register from "./Register"
+import React, { Suspense } from "react"
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom"
+import "semantic-ui-css/semantic.min.css"
+// import AuthRoute from "../lib/AuthRoute"
+import { AuthProvider, AuthRoute } from "react-auth"
+// import Login from "./Form"
+// import Chatroom from "./Chatroom"
+import Register from "./Form"
+
+const Login = React.lazy(() => import("./Form"))
+const Chatroom = React.lazy(() => import("./Chatroom"))
 
 export default props => {
   return (
-    <Router>
-      <div>
-        <AuthRoute exact path="/" component={Chatroom} />
-        <Route path="/login" component={Login} />
-        <Route path="/register" component={Register} />
-      </div>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <div>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Route path="/login" component={Login} />
+            <Route
+              exact
+              path="/"
+              render={() => <Redirect to="/chat/general" />}
+            />
+            <AuthRoute path="/chat/:roomname" component={Chatroom} />
+            <Route path="/register" component={Register} />
+          </Suspense>
+        </div>
+      </Router>
+    </AuthProvider>
   )
 }
 
