@@ -11,7 +11,7 @@ export default props => {
 
   function handleLogin(e) {
     e.preventDefault(e)
-    api.post("/register").then(data => {
+    api.post("/register", { username, password }).then(data => {
       signin(username, password).then(() => {
         props.history.push("/chat/general")
       })

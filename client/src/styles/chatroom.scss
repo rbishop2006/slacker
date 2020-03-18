@@ -1,0 +1,12 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+
+.light {
+  color: #eee;
+}
+.messageArea {
+  height: 700px;
+  overflow: auto;
+}
