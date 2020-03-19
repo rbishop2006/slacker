@@ -14,14 +14,3 @@ export default ({ component: Component, ...rest }) => {
     />
   )
 }
-
-//my original code
-
-// export default props => {
-//   const { isAuthenticated } = useAuth()
-//   if (isAuthenticated) {
-//     return <Route {...props} />
-//   } else {
-//     return <Redirect to="/login" />
-//   }
-// }

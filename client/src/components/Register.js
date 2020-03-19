@@ -1,142 +1,93 @@
 import React, { useState } from "react"
 import { useAuth } from "react-auth"
-import { Button, Form } from "semantic-ui-react"
+import { Button, Form, Input } from "semantic-ui-react"
 import { api } from "react-auth"
 
 export default props => {
   const [username, setUsername] = useState("")
+  const [usernameErr, setUsernameErr] = useState("")
   const [password, setPassword] = useState("")
+  const [passwordErr, setPasswordErr] = useState("")
   const [cpassword, setCPassword] = useState("")
+  const [cpasswordErr, setCPasswordErr] = useState("")
   const { signin } = useAuth()
 
   function handleLogin(e) {
     e.preventDefault(e)
-    api.post("/register", { username, password }).then(data => {
-      signin(username, password).then(() => {
-        props.history.push("/chat/general")
+
+    let err = false
+
+    if (username.length < 4) {
+      err = true
+      setUsernameErr("Min Length is 4")
+    } else if (username.length > 20) {
+      err = true
+      setUsernameErr("Max Length is 20")
+    } else {
+      setUsernameErr("")
+    }
+
+    if (password.length < 8) {
+      err = true
+      setPasswordErr("Min Length is 8")
+    } else {
+      setPasswordErr("")
+    }
+    if (password !== cpassword) {
+      err = true
+      setCPasswordErr("Passwords must match")
+    } else {
+      setCPasswordErr("")
+    }
+    if (!err) {
+      api.post("/register", { username, password }).then(data => {
+        signin(username, password).then(() => {
+          props.history.push("/chat/general")
+        })
       })
-    })
+    }
   }
 
   return (
     <Form onSubmit={handleLogin}>
-      <Form.Field>
-        <input
-          type="text"
-          value={username}
-          onChange={e => setUsername(e.target.value)}
-          placeholder="username"
-        />
-      </Form.Field>
-      <Form.Field>
-        <input
-          type="password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          placeholder="password"
-        />
-      </Form.Field>
-      <Form.Field>
-        <input
-          type="password"
-          value={cpassword}
-          onChange={e => setCPassword(e.target.value)}
-          placeholder="confirm password"
-        />
-      </Form.Field>
+      <Form.Field
+        control={Input}
+        value={username}
+        onChange={e => setUsername(e.target.value)}
+        label="Username"
+        placeholder="ex. John Smith"
+        error={
+          usernameErr
+            ? {
+                content: usernameErr,
+                pointing: "below"
+              }
+            : false
+        }
+      ></Form.Field>
+      <Form.Field
+        control={Input}
+        type="password"
+        value={password}
+        onChange={e => setPassword(e.target.value)}
+        label="Password"
+        placeholder="must be at least 8 characters"
+        error={
+          passwordErr ? { content: passwordErr, pointing: "below" } : false
+        }
+      ></Form.Field>
+      <Form.Field
+        control={Input}
+        type="password"
+        value={cpassword}
+        onChange={e => setCPassword(e.target.value)}
+        label="confirm Password"
+        placeholder="must be at least 8 characters"
+        error={
+          cpasswordErr ? { content: cpasswordErr, pointing: "below" } : false
+        }
+      ></Form.Field>
       <Button type="submit">Register</Button>
     </Form>
   )
 }
-
-// import React, { useState } from "react"
-// import { useRegister } from "../hooks"
-// import { Link } from "react-router-dom"
-// import validator from "validator"
-
-// export default props => {
-//   const [username, setUsername] = useState("")
-//   const [usernameError, setUsernameError] = useState("")
-//   const [password, setPassword] = useState("")
-//   const [passwordError, setPasswordError] = useState("")
-//   const [confirmPassword, setConfirmPassword] = useState("")
-//   const [confirmPasswordError, setConfirmPasswordError] = useState("")
-
-//   const { reg } = useRegister()
-
-//   function handleRegister(e) {
-//     e.preventDefault(e)
-//     let valid = true
-
-//     if (!validator.isAlpha(username, "en-US")) {
-//       valid = false
-//       setUsernameError(`--Cannot be blank, must contain only letters`)
-//     } else {
-//       setUsernameError("")
-//     }
-//     if (
-//       !validator.isAlphanumeric(password, "en-US")
-//       // .isLength(password, { min: 8, max: undefined })
-//     ) {
-//       valid = false
-//       setPasswordError(`--Cannot be blank, must be at least 8 characters`)
-//     } else {
-//       setPasswordError("")
-//     }
-//     if (!validator.equals(confirmPassword, password)) {
-//       valid = false
-//       setConfirmPasswordError(`--Must match password`)
-//     } else {
-//       setConfirmPasswordError("")
-//     }
-
-//     if (valid) {
-//       reg(username, password).then(() => {
-//         props.history.push("/login")
-//       })
-//     }
-//   }
-
-//   return (
-//     <form onSubmit={handleRegister}>
-//       <label className={usernameError ? "error" : ""} htmlFor="username">
-//         Username{usernameError && usernameError}
-//       </label>
-//       <input
-//         type="text"
-//         value={username}
-//         id="username"
-//         className={usernameError ? "errorBox" : ""}
-//         onChange={e => setUsername(e.target.value)}
-//         placeholder="username"
-//       />
-//       <br />
-//       <label className={passwordError ? "error" : ""} htmlFor="password">
-//         Password{passwordError && passwordError}
-//       </label>
-//       <input
-//         type="password"
-//         id="password"
-//         className={passwordError ? "errorBox" : ""}
-//         value={password}
-//         onChange={e => setPassword(e.target.value)}
-//         placeholder="password"
-//       />
-//       <br />
-//       <label className={confirmPasswordError ? "error" : ""} htmlFor="confirm">
-//         Confirm{confirmPasswordError && confirmPasswordError}
-//       </label>
-//       <input
-//         type="password"
-//         id="confirm"
-//         className={confirmPasswordError ? "errorBox" : ""}
-//         value={confirmPassword}
-//         onChange={e => setConfirmPassword(e.target.value)}
-//         placeholder="password"
-//       />
-//       <br />
-//       <button type="submit">Register</button>
-//       <Link to="/login">Login</Link>
-//     </form>
-//   )
-// }

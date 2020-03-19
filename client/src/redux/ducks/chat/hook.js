@@ -7,7 +7,7 @@ init()
 
 export function useChat() {
   const messages = useSelector(appState => appState.chatState.messages)
-  const add = msg => socket.emit("new message", msg)
+  const add = msg => socket.emit("message", msg)
 
   return { messages, add }
 }
